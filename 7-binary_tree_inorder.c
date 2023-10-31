@@ -3,7 +3,7 @@
 /**
 * binary_tree_inorder - traverse a tree inorder
 * @tree: root nodde
-* @funf: pointer to a funtion
+* @func: pointer to a funtion
 * Return: void
 */
 
