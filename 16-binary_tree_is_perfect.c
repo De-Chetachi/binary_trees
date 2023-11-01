@@ -1,28 +1,25 @@
 #include "binary_trees.h"
 
 /**
-* binary_tree_balance - checks the balance factor of a binary tree
-* @tree: root nodde
-* Return: balance factor
+* binary_tree_nodes - counts nodes with at least one child in a binary tree
+* @tree: pointer to the node whose leaves is to be measured
+* Return: leaves number
 */
 
-int binary_tree_balance(const binary_tree_t *tree)
+size_t binary_tree_nodes(const binary_tree_t *tree)
 {
-	int height_left, height_right;
+	size_t nodes = 0;
 
 	if (!tree)
-		return (0);
-	if (tree->left)
-		height_left = 1 + binary_tree_balance(tree->left);
-	else
-		 height_left = 0;
-	if (tree->right)
-		height_right = 1 + binary_tree_balance(tree->right);
-	else
-		height_right = 0;
-
-	return (height_left - height_right);
+		return (nodes);
+	if (tree->left || tree->right)
+	{
+		nodes = 1 + binary_tree_nodes(tree->left);
+		nodes = nodes + binary_tree_nodes(tree->right);
+	}
+	return (nodes);
 }
+
 
 /**
 * binary_tree_is_perfect - checks if a binary tree is perfect
@@ -32,24 +29,14 @@ int binary_tree_balance(const binary_tree_t *tree)
 
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	int perfect = 0;
-
 	if (!tree)
 		return (0);
 
-	if (binary_tree_balance(tree) != 0)
-		return (0);
-
-	if (!tree->left && !tree->right)
+	if (binary_tree_nodes(tree->left) == binary_tree_nodes(tree->right))
 	{
+		/*l_full = binary_tree_is_full(tree->left);*/
+		/*r_full = binary_tree_is_full(tree->right);*/
 		return (1);
 	}
-	if (tree->left && tree->right)
-	{
-		perfect = 1;
-	}
-	perfect = perfect * binary_tree_is_perfect(tree->left);
-	perfect = perfect * binary_tree_is_perfect(tree->right);
-
-	return (perfect);
+	return (0);
 }
