@@ -1,7 +1,8 @@
 #include "binary_trees.h"
 
 /**
-* binary_tree_fullnodes - counts full nodes with at least one child in a binary tree
+* binary_tree_fullnodes - counts nodes with at least
+* two child in a binary tree
 * @tree: pointer to the node whose leaves is to be measured
 * Return: leaves number
 */
